@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taruna Owners (TO) - Komunitas Mobil Daihatsu Taruna Indonesia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        to: {
+                            orange: '#F97316',
+                            orangeDark: '#EA580C',
+                            orangeLight: '#FFF7ED',
+                            bgLight: '#F4F6F9',
+                            borderLight: '#E2E8F0',
+                            dark: '#0F172A',
+                            muted: '#64748B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom subtle animations & scrollbar */
+        body {
+            background-color: #FFFFFF;
+            color: #0F172A;
+            overflow-x: hidden;
+        }
+        .page-section {
+            display: none;
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-item {
+            transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4F6F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F97316;
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- ==================== TOP BAR & STICKY NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-to-borderLight shadow-sm">
+        <!-- Info Strip -->
+        <div class="bg-to-dark text-white text-xs py-2 px-4 hidden sm:block">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="flex items-center gap-1.5 text-slate-300">
+                        <i class="fa-solid fa-car-side text-to-orange"></i> Seduluran Selawase • Brotherhood on Wheels
+                    </span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-slate-300"><i class="fa-solid fa-location-dot text-to-orange mr-1"></i> 18 Chapter Nasional</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Taruna%20Owners%2C%20saya%20ingin%20bertanya%20seputar%20komunitas%20TO." target="_blank" class="hover:text-to-orange transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-green-400"></i> Sekretariat: +62 812-3456-7890
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <button onclick="navigateTo('home')" class="flex items-center gap-3 text-left focus:outline-none group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-to-orange to-to-orangeDark flex items-center justify-center text-white shadow-md shadow-orange-500/20 group-hover:scale-105 transition">
+                        <i class="fa-solid fa-compass text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-display font-extrabold text-xl tracking-tight text-to-dark leading-none">
+                            TARUNA <span class="text-to-orange">OWNERS</span>
+                        </div>
+                        <span class="text-[11px] font-semibold tracking-wider text-to-muted uppercase">Daihatsu Taruna Indonesia</span>
+                    </div>
+                </button>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-1 bg-to-bgLight p-1.5 rounded-2xl border border-to-borderLight">
+                    <button onclick="navigateTo('home')" data-nav="home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition">Beranda</button>
+                    <button onclick="navigateTo('profil')" data-nav="profil" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition">Profil & Sejarah</button>
+                    <button onclick="navigateTo('struktur')" data-nav="struktur" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition">Struktur Pengurus</button>
+                    <button onclick="navigateTo('anggota')" data-nav="anggota" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition">Direktori Anggota</button>
+                    <button onclick="navigateTo('agenda')" data-nav="agenda" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition">Agenda & Kopdar</button>
+                </div>
+
+                <!-- CTA Button Desktop -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <button onclick="openRegisterModal()" class="bg-to-orange hover:bg-to-orangeDark text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md shadow-orange-500/20 transition flex items-center gap-2 active:scale-95">
+                        <i class="fa-solid fa-user-plus"></i> Gabung Member
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex items-center lg:hidden">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl bg-to-bgLight text-to-dark hover:text-to-orange border border-to-borderLight focus:outline-none" aria-label="Buka Menu">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-drawer" class="hidden lg:hidden bg-white border-t border-to-borderLight px-4 pt-3 pb-6 space-y-2 shadow-xl">
+            <button onclick="navigateTo('home'); toggleMobileMenu()" data-nav="home" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-sm flex items-center gap-3">
+                <i class="fa-solid fa-house w-5 text-center"></i> Beranda
+            </button>
+            <button onclick="navigateTo('profil'); toggleMobileMenu()" data-nav="profil" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-sm flex items-center gap-3">
+                <i class="fa-solid fa-shield-halved w-5 text-center"></i> Profil & Sejarah
+            </button>
+            <button onclick="navigateTo('struktur'); toggleMobileMenu()" data-nav="struktur" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-sm flex items-center gap-3">
+                <i class="fa-solid fa-sitemap w-5 text-center"></i> Struktur Organisasi
+            </button>
+            <button onclick="navigateTo('anggota'); toggleMobileMenu()" data-nav="anggota" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-sm flex items-center gap-3">
+                <i class="fa-solid fa-users w-5 text-center"></i> Direktori Anggota
+            </button>
+            <button onclick="navigateTo('agenda'); toggleMobileMenu()" data-nav="agenda" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-sm flex items-center gap-3">
+                <i class="fa-solid fa-calendar-days w-5 text-center"></i> Agenda & Kegiatan
+            </button>
+            <div class="pt-3 border-t border-to-borderLight grid grid-cols-1 gap-2.5">
+                <button onclick="toggleMobileMenu(); openRegisterModal()" class="w-full bg-to-orange hover:bg-to-orangeDark text-white font-semibold text-sm py-3 rounded-xl shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-id-card"></i> Formulir Pendaftaran Member
+                </button>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Taruna%20Owners%2C%20saya%20ingin%20tanya%20info%20pendaftaran%20member%20baru." target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-3 rounded-xl flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Tanya Admin via WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT AREA (SPA PAGES) ==================== -->
+    <main class="flex-grow">
+
+        <!-- ===================================================================== -->
+        <!-- PAGE 1: BERANDA (HOME)                                                -->
+        <!-- ===================================================================== -->
+        <section id="page-home" class="page-section active">
+            <!-- Hero Interactive Slideshow -->
+            <div class="relative bg-to-dark overflow-hidden">
+                <div id="hero-carousel" class="relative h-[540px] sm:h-[600px] lg:h-[640px] w-full">
+                    
+                    <!-- Slide 1 -->
+                    <div class="slide-item absolute inset-0 opacity-100 z-10" data-slide="0">
+                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1800&q=80" 
+                             onerror="this.src='https://placehold.co/1600x800/1E293B/F97316?text=Touring+Nusantara+Taruna+Owners'"
+                             alt="Touring Lintas Nusantara Taruna Owners" class="w-full h-full object-cover object-center opacity-45">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent"></div>
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+                            <div class="max-w-2xl text-white space-y-6">
+                                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-to-orange/20 border border-to-orange/40 text-to-orange text-xs font-bold uppercase tracking-wider">
+                                    <i class="fa-solid fa-fire"></i> Komunitas Resmi Daihatsu Taruna
+                                </span>
+                                <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                                    Satu Aspal, Sejuta Saudara Bersama <span class="text-to-orange">Taruna Owners</span>
+                                </h1>
+                                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                                    Wadah silaturahmi, berbagi solusi teknis mesin & kaki-kaki, serta petualangan touring keluarga pengguna Daihatsu Taruna seluruh Nusantara.
+                                </p>
+                                <div class="flex flex-wrap gap-3 pt-2">
+                                    <button onclick="openRegisterModal()" class="bg-to-orange hover:bg-to-orangeDark text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-orange-500/30 transition flex items-center gap-2">
+                                        Daftar Member Sekarang <i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                    <button onclick="navigateTo('agenda')" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 font-semibold px-6 py-3.5 rounded-xl transition">
+                                        Lihat Jadwal Touring
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="slide-item absolute inset-0 opacity-0 z-0 pointer-events-none" data-slide="1">
+                        <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1800&q=80" 
+                             onerror="this.src='https://placehold.co/1600x800/1E293B/F97316?text=Kopdar+Gabungan+Nasional'"
+                             alt="Kopdar Gabungan Nasional" class="w-full h-full object-cover object-center opacity-45">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent"></div>
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+                            <div class="max-w-2xl text-white space-y-6">
+                                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-to-orange/20 border border-to-orange/40 text-to-orange text-xs font-bold uppercase tracking-wider">
+                                    <i class="fa-solid fa-people-group"></i> Family Friendly Community
+                                </span>
+                                <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                                    Kopdar Rutin & <span class="text-to-orange">Keluarga Besar</span> di 18 Chapter
+                                </h2>
+                                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                                    Bukan sekadar hobi otomotif, setiap kopi darat adalah momen hangat membawa keluarga, berbagi cerita, dan mempererat persaudaraan tanpa batas.
+                                </p>
+                                <div class="flex flex-wrap gap-3 pt-2">
+                                    <button onclick="navigateTo('anggota')" class="bg-to-orange hover:bg-to-orangeDark text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-orange-500/30 transition flex items-center gap-2">
+                                        Cek Direktori Anggota <i class="fa-solid fa-users"></i>
+                                    </button>
+                                    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Taruna%20Owners%2C%20saya%20ingin%20tahu%20jadwal%20kopdar%20terdekat." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-2">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i> Hubungi Humas
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="slide-item absolute inset-0 opacity-0 z-0 pointer-events-none" data-slide="2">
+                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1800&q=80" 
+                             onerror="this.src='https://placehold.co/1600x800/1E293B/F97316?text=Coaching+Clinic+Mesin+Taruna'"
+                             alt="Coaching Clinic & Bengkel Rekanan" class="w-full h-full object-cover object-center opacity-45">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent"></div>
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+                            <div class="max-w-2xl text-white space-y-6">
+                                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-to-orange/20 border border-to-orange/40 text-to-orange text-xs font-bold uppercase tracking-wider">
+                                    <i class="fa-solid fa-wrench"></i> Dukungan Teknis & Bengkel
+                                </span>
+                                <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                                    Rawat Taruna Kesayangan Jadi <span class="text-to-orange">Prima & Tangguh</span>
+                                </h2>
+                                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                                    Akses konsultasi langsung bersama suhu mekanik TO, jaringan bengkel rekanan resmi di berbagai kota, serta info ketersediaan sparepart terpercaya.
+                                </p>
+                                <div class="flex flex-wrap gap-3 pt-2">
+                                    <button onclick="navigateTo('profil')" class="bg-to-orange hover:bg-to-orangeDark text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-orange-500/30 transition flex items-center gap-2">
+                                        Tentang Taruna Owners <i class="fa-solid fa-circle-info"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="slide-item absolute inset-0 opacity-0 z-0 pointer-events-none" data-slide="3">
+                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1800&q=80" 
+                             onerror="this.src='https://placehold.co/1600x800/1E293B/F97316?text=Bakti+Sosial+Taruna+Owners'"
+                             alt="Bakti Sosial & Peduli Sesama" class="w-full h-full object-cover object-center opacity-45">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent"></div>
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+                            <div class="max-w-2xl text-white space-y-6">
+                                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-to-orange/20 border border-to-orange/40 text-to-orange text-xs font-bold uppercase tracking-wider">
+                                    <i class="fa-solid fa-hand-holding-heart"></i> TO Peduli Sesama
+                                </span>
+                                <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                                    Melaju Bersama Memberi <span class="text-to-orange">Manfaat Nyata</span>
+                                </h2>
+                                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                                    Setiap perjalanan Taruna Owners selalu diiringi aksi bakti sosial, santunan, dan kampanye keselamatan berkendara (Safety Driving).
+                                </p>
+                                <div class="flex flex-wrap gap-3 pt-2">
+                                    <button onclick="openRegisterModal()" class="bg-to-orange hover:bg-to-orangeDark text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-orange-500/30 transition">
+                                        Bergabung Bersama Kami
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Controls (Arrows) -->
+                    <button onclick="prevSlide()" aria-label="Slide Sebelumnya" class="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/15 hover:bg-to-orange text-white backdrop-blur-md items-center justify-center transition">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button onclick="nextSlide()" aria-label="Slide Berikutnya" class="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/15 hover:bg-to-orange text-white backdrop-blur-md items-center justify-center transition">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Carousel Indicators (Dots) -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5 bg-slate-950/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                        <button onclick="goToSlide(0)" class="carousel-dot w-8 h-2.5 rounded-full bg-to-orange transition-all" aria-label="Slide 1"></button>
+                        <button onclick="goToSlide(1)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white transition-all" aria-label="Slide 2"></button>
+                        <button onclick="goToSlide(2)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white transition-all" aria-label="Slide 3"></button>
+                        <button onclick="goToSlide(3)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white transition-all" aria-label="Slide 4"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistik Komunitas Bar -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg shadow-slate-200/70 border border-to-borderLight flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-to-orangeLight text-to-orange flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-id-badge"></i>
+                        </div>
+                        <div>
+                            <div class="font-display font-extrabold text-2xl sm:text-3xl text-to-dark">1.450+</div>
+                            <div class="text-xs sm:text-sm text-to-muted font-medium">Member Teregistrasi</div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-lg shadow-slate-200/70 border border-to-borderLight flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-to-orangeLight text-to-orange flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <div>
+                            <div class="font-display font-extrabold text-2xl sm:text-3xl text-to-dark">18</div>
+                            <div class="text-xs sm:text-sm text-to-muted font-medium">Chapter & Korwil</div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-lg shadow-slate-200/70 border border-to-borderLight flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-to-orangeLight text-to-orange flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+                        <div>
+                            <div class="font-display font-extrabold text-2xl sm:text-3xl text-to-dark">45+</div>
+                            <div class="text-xs sm:text-sm text-to-muted font-medium">Agenda Tahunan</div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-lg shadow-slate-200/70 border border-to-borderLight flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-to-orangeLight text-to-orange flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <div>
+                            <div class="font-display font-extrabold text-2xl sm:text-3xl text-to-dark">60+</div>
+                            <div class="text-xs sm:text-sm text-to-muted font-medium">Bengkel Rekanan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highlight Profil Singkat -->
+            <div class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-10 items-center">
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-to-bgLight text-to-orange font-bold text-xs uppercase tracking-wider border border-to-borderLight">
+                            <span class="w-2 h-2 rounded-full bg-to-orange"></span> Mengenal Taruna Owners
+                        </div>
+                        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-to-dark leading-tight">
+                            Lebih Dari Sekadar Komunitas Mobil, Kami Adalah <span class="text-to-orange">Keluarga</span>
+                        </h2>
+                        <p class="text-to-muted leading-relaxed text-base">
+                            <strong>Taruna Owners (TO)</strong> hadir menyatukan para pemilik dan pecinta SUV legendaris Daihatsu Taruna di seluruh Indonesia—mulai dari generasi C-Series (CL, CX, CSX), F-Series (FL, FX, FGX, FGZ), hingga varian Oxxy.
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-4 pt-2">
+                            <div class="bg-to-bgLight p-4 rounded-2xl border border-to-borderLight">
+                                <div class="text-to-orange font-bold mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-handshake"></i> Solidaritas Tanpa Batas
+                                </div>
+                                <p class="text-xs text-to-muted leading-relaxed">Sistem bantuan darurat (Emergency Rescue) antar anggota saat mengalami kendala di perjalanan.</p>
+                            </div>
+                            <div class="bg-to-bgLight p-4 rounded-2xl border border-to-borderLight">
+                                <div class="text-to-orange font-bold mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-gears"></i> Sharing Teknis & Part
+                                </div>
+                                <p class="text-xs text-to-muted leading-relaxed">Diskusi perawatan mesin karburator & EFI, modifikasi fungsional, serta informasi sparepart.</p>
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <button onclick="navigateTo('profil')" class="inline-flex items-center gap-2 text-to-orange hover:text-to-orangeDark font-bold text-sm group">
+                                Baca Sejarah & Visi Misi Lengkap <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-6">
+                        <div class="relative bg-to-bgLight p-4 sm:p-6 rounded-3xl border border-to-borderLight">
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80" 
+                                 onerror="this.src='https://placehold.co/800x550/F4F6F9/F97316?text=Kebersamaan+Taruna+Owners'"
+                                 alt="Kebersamaan Member Taruna Owners" class="w-full h-72 sm:h-80 object-cover rounded-2xl shadow-md">
+                            <div class="mt-4 flex items-center justify-between bg-white p-4 rounded-2xl border border-to-borderLight shadow-sm">
+                                <div>
+                                    <div class="text-xs text-to-muted font-medium">Semboyan Kebanggaan</div>
+                                    <div class="font-display font-bold text-to-dark text-base sm:text-lg">"Seduluran Selawase • Guyub Rukun"</div>
+                                </div>
+                                <span class="px-3 py-1.5 rounded-xl bg-to-orangeLight text-to-orange font-bold text-xs">Est. 2012</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Agenda Terdekat -->
+            <div class="bg-to-bgLight py-16 border-y border-to-borderLight">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+                        <div>
+                            <span class="text-to-orange font-bold text-xs uppercase tracking-wider">Kalender Kegiatan</span>
+                            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-to-dark mt-1">Agenda Terdekat Taruna Owners</h2>
+                        </div>
+                        <button onclick="navigateTo('agenda')" class="bg-white hover:bg-to-orange hover:text-white text-to-dark border border-to-borderLight font-semibold text-sm px-5 py-2.5 rounded-xl transition self-start sm:self-auto">
+                            Semua Agenda <i class="fa-solid fa-calendar-check ml-1.5"></i>
+                        </button>
+                    </div>
+
+                    <div id="home-agenda-preview" class="grid md:grid-cols-3 gap-6">
+                        <!-- Diisi otomatis oleh JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Banner Pendaftaran via WhatsApp -->
+            <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-r from-to-dark via-slate-900 to-slate-800 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-xl">
+                    <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-to-orange/20 blur-2xl"></div>
+                    <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+                        <div class="max-w-2xl space-y-3">
+                            <span class="inline-block px-3 py-1 rounded-full bg-to-orange text-white text-xs font-bold uppercase">Open Recruitment Member</span>
+                            <h2 class="font-display text-2xl sm:text-4xl font-extrabold leading-tight">
+                                Punya Daihatsu Taruna? Yuk Jadi Bagian dari Keluarga Besar TO!
+                            </h2>
+                            <p class="text-slate-300 text-sm sm:text-base">
+                                Dapatkan Nomor Lambung resmi (NOPUNG), stiker identitas komunitas, kartu anggota, dan akses jaringan sedulur di seluruh Indonesia.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto shrink-0">
+                            <button onclick="openRegisterModal()" class="bg-to-orange hover:bg-to-orangeDark text-white font-bold px-6 py-4 rounded-2xl shadow-lg shadow-orange-500/25 transition text-center flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-file-signature"></i> Isi Form Pendaftaran
+                            </button>
+                            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Taruna%20Owners%2C%20saya%20ingin%20mendapatkan%20informasi%20syarat%20dan%20cara%20pendaftaran%20member%20baru%20Taruna%20Owners." target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-4 rounded-2xl transition text-center flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-xl"></i> Chat WhatsApp Admin
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PAGE 2: PROFIL & SEJARAH                                              -->
+        <!-- ===================================================================== -->
+        <section id="page-profil" class="page-section">
+            <!-- Header Page -->
+            <div class="bg-to-bgLight border-b border-to-borderLight py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <span class="text-to-orange font-bold text-xs uppercase tracking-wider">Tentang Organisasi</span>
+                    <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-to-dark mt-2">Profil & Sejarah Taruna Owners</h1>
+                    <p class="text-to-muted mt-3 max-w-2xl text-sm sm:text-base">Mengenal perjalanan panjang komunitas pengguna Daihatsu Taruna Indonesia dalam membangun persaudaraan, kepedulian sosial, dan budaya tertib berlalu lintas.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-16">
+                <!-- Sejarah & Latar Belakang -->
+                <div class="grid lg:grid-cols-12 gap-10 items-start">
+                    <div class="lg:col-span-7 space-y-5">
+                        <h2 class="font-display text-2xl font-bold text-to-dark flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-to-orange text-white flex items-center justify-center text-sm"><i class="fa-solid fa-book-open"></i></span>
+                            Sejarah Berdirinya Taruna Owners
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed">
+                            <strong>Taruna Owners (TO)</strong> berawal dari pertemuan sederhana belasan pengguna Daihatsu Taruna pada tahun 2012 yang memiliki kepedulian sama terhadap perawatan kendaraan dan kerinduan akan wadah silaturahmi yang hangat serta kekeluargaan.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            Berlandaskan semangat <em>"Seduluran Selawase — Brotherhood on Wheels"</em>, komunitas ini berkembang pesat melintasi batas daerah. Dari sekadar diskusi teknis ringan di pinggir jalan saat kopi darat, kini Taruna Owners telah memiliki 18 Chapter dan Koordinator Wilayah (Korwil) yang tersebar di Pulau Jawa, Sumatera, Bali, hingga Kalimantan.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            TO bersifat independen, non-politik, dan terbuka bagi seluruh pemilik Daihatsu Taruna dari berbagai tahun pembuatan (1999–2006) serta berbagai varian (CL, CX, CSX, FL, FX, FGX, FGZ, hingga Oxxy).
+                        </p>
+
+                        <!-- Nilai Utama -->
+                        <div class="grid sm:grid-cols-3 gap-4 pt-4">
+                            <div class="bg-to-bgLight p-5 rounded-2xl border border-to-borderLight text-center">
+                                <div class="w-10 h-10 mx-auto rounded-xl bg-white text-to-orange flex items-center justify-center shadow-sm mb-3">
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                                <h3 class="font-bold text-to-dark text-sm">Kekeluargaan</h3>
+                                <p class="text-xs text-to-muted mt-1">Mengutamakan keharmonisan & melibatkan keluarga di setiap acara.</p>
+                            </div>
+                            <div class="bg-to-bgLight p-5 rounded-2xl border border-to-borderLight text-center">
+                                <div class="w-10 h-10 mx-auto rounded-xl bg-white text-to-orange flex items-center justify-center shadow-sm mb-3">
+                                    <i class="fa-solid fa-life-ring"></i>
+                                </div>
+                                <h3 class="font-bold text-to-dark text-sm">Solidaritas</h3>
+                                <p class="text-xs text-to-muted mt-1">Saling bantu tanpa pamrih saat rekan mengalami kendala di jalan.</p>
+                            </div>
+                            <div class="bg-to-bgLight p-5 rounded-2xl border border-to-borderLight text-center">
+                                <div class="w-10 h-10 mx-auto rounded-xl bg-white text-to-orange flex items-center justify-center shadow-sm mb-3">
+                                    <i class="fa-solid fa-traffic-light"></i>
+                                </div>
+                                <h3 class="font-bold text-to-dark text-sm">Tertib Lalu Lintas</h3>
+                                <p class="text-xs text-to-muted mt-1">Menjadi pelopor keselamatan berkendara & anti arogan di jalan raya.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visi & Misi Card -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-white rounded-3xl p-7 border border-to-borderLight shadow-lg shadow-slate-200/50">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-to-orangeLight text-to-orange font-bold text-xs mb-4">
+                                <i class="fa-solid fa-bullseye"></i> VISI ORGANISASI
+                            </div>
+                            <p class="font-display font-bold text-lg text-to-dark leading-snug">
+                                "Menjadi komunitas otomotif Daihatsu Taruna yang solid, bermanfaat bagi anggota dan masyarakat, serta menjadi pelopor keselamatan berkendara di Indonesia."
+                            </p>
+                        </div>
+
+                        <div class="bg-to-bgLight rounded-3xl p-7 border border-to-borderLight">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white text-to-orange font-bold text-xs mb-4 shadow-sm">
+                                <i class="fa-solid fa-list-check"></i> MISI ORGANISASI
+                            </div>
+                            <ul class="space-y-3.5 text-sm text-slate-700">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-to-orange mt-1"></i>
+                                    <span>Mempererat tali silaturahmi antar pemilik Daihatsu Taruna lintas generasi dan daerah.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-to-orange mt-1"></i>
+                                    <span>Menyediakan pusat edukasi perawatan kendaraan, modifikasi aman, dan jaringan bengkel rekanan.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-to-orange mt-1"></i>
+                                    <span>Menyelenggarakan kegiatan touring wisata keluarga dan bakti sosial secara berkala.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-to-orange mt-1"></i>
+                                    <span>Menjaga etika berkendara yang santun dan mematuhi peraturan lalu lintas.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Galeri Dokumentasi Singkat -->
+                <div>
+                    <div class="mb-6">
+                        <span class="text-to-orange font-bold text-xs uppercase tracking-wider">Momen Kebersamaan</span>
+                        <h2 class="font-display text-2xl font-bold text-to-dark mt-1">Galeri Aktivitas Taruna Owners</h2>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="group bg-to-bgLight rounded-2xl overflow-hidden border border-to-borderLight">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" alt="Jamnas TO" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="p-4">
+                                <span class="text-[11px] font-bold text-to-orange uppercase">Jambore Nasional</span>
+                                <h4 class="font-bold text-to-dark text-sm mt-0.5">Konvoi Lintas Jawa - Bali</h4>
+                            </div>
+                        </div>
+                        <div class="group bg-to-bgLight rounded-2xl overflow-hidden border border-to-borderLight">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80" alt="Coaching Clinic" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="p-4">
+                                <span class="text-[11px] font-bold text-to-orange uppercase">Edukasi Teknis</span>
+                                <h4 class="font-bold text-to-dark text-sm mt-0.5">Coaching Clinic Mesin HD-C & HD-E</h4>
+                            </div>
+                        </div>
+                        <div class="group bg-to-bgLight rounded-2xl overflow-hidden border border-to-borderLight">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=600&q=80" alt="Kopdar Keluarga" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="p-4">
+                                <span class="text-[11px] font-bold text-to-orange uppercase">Kopdar Gabungan</span>
+                                <h4 class="font-bold text-to-dark text-sm mt-0.5">Family Gathering & Camp Ceria</h4>
+                            </div>
+                        </div>
+                        <div class="group bg-to-bgLight rounded-2xl overflow-hidden border border-to-borderLight">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=600&q=80" alt="TO Peduli" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="p-4">
+                                <span class="text-[11px] font-bold text-to-orange uppercase">Bakti Sosial</span>
+                                <h4 class="font-bold text-to-dark text-sm mt-0.5">TO Peduli Bencana & Santunan</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PAGE 3: STRUKTUR ORGANISASI                                           -->
+        <!-- ===================================================================== -->
+        <section id="page-struktur" class="page-section">
+            <div class="bg-to-bgLight border-b border-to-borderLight py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <span class="text-to-orange font-bold text-xs uppercase tracking-wider">Kepengurusan Pusat</span>
+                    <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-to-dark mt-2">Struktur Organisasi Taruna Owners</h1>
+                    <p class="text-to-muted mt-3 max-w-2xl text-sm sm:text-base">Susunan Pengurus Pusat (PP) Taruna Owners periode berjalan yang bertugas mengkoordinasikan seluruh program kerja, kegiatan nasional, dan pembinaan chapter.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+                <!-- Bagan Hierarki Pimpinan Utama -->
+                <div class="flex flex-col items-center">
+                    <!-- Ketua Umum -->
+                    <div class="w-full max-w-md bg-white rounded-3xl p-6 border-2 border-to-orange shadow-xl shadow-orange-500/10 text-center relative">
+                        <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-to-orange text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                            Ketua Umum
+                        </span>
+                        <div class="w-20 h-20 mx-auto rounded-2xl bg-to-bgLight border border-to-borderLight flex items-center justify-center text-to-orange text-3xl font-display font-extrabold mt-2">
+                            HS
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-to-dark mt-4">Hendra Saputra</h3>
+                        <div class="text-xs font-bold text-to-orange mt-1">NOPUNG: TO-001 • Chapter Jabodetabek</div>
+                        <p class="text-xs text-to-muted mt-2">Unit: Taruna FGX 1.5 EFI (2003)</p>
+                    </div>
+
+                    <!-- Garis Penghubung Vertikal -->
+                    <div class="w-0.5 h-8 bg-slate-300"></div>
+
+                    <!-- Wakil Ketua Umum -->
+                    <div class="w-full max-w-md bg-to-bgLight rounded-3xl p-6 border border-to-borderLight shadow-sm text-center relative">
+                        <span class="inline-block bg-to-dark text-white text-[11px] font-bold px-3.5 py-1 rounded-full uppercase tracking-wider mb-3">
+                            Wakil Ketua Umum
+                        </span>
+                        <div class="flex items-center justify-center gap-4 text-left">
+                            <div class="w-14 h-14 rounded-2xl bg-white border border-to-borderLight flex items-center justify-center text-to-orange font-display font-bold text-xl shrink-0">
+                                BW
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-to-dark">Bambang Wijaya</h3>
+                                <div class="text-xs font-semibold text-to-orange">NOPUNG: TO-014 • Chapter Bandung</div>
+                                <div class="text-xs text-to-muted mt-0.5">Unit: Taruna Oxxy 1.5 (2005)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Garis Penghubung -->
+                    <div class="w-0.5 h-8 bg-slate-300"></div>
+                    <div class="hidden md:block w-3/4 h-0.5 bg-slate-300"></div>
+                </div>
+
+                <!-- Sekretaris & Bendahara -->
+                <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-6 md:mt-0">
+                    <div class="md:pt-6">
+                        <div class="bg-white rounded-2xl p-6 border border-to-borderLight shadow-sm hover:border-to-orange transition flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-to-orangeLight text-to-orange flex items-center justify-center font-display font-bold text-xl shrink-0">
+                                AP
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-to-orange">Sekretaris Jenderal</span>
+                                <h4 class="font-display font-bold text-lg text-to-dark">Andi Pratama</h4>
+                                <p class="text-xs text-to-muted">TO-027 • Chapter Semarang • Taruna CSX 2001</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:pt-6">
+                        <div class="bg-white rounded-2xl p-6 border border-to-borderLight shadow-sm hover:border-to-orange transition flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-to-orangeLight text-to-orange flex items-center justify-center font-display font-bold text-xl shrink-0">
+                                RN
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-to-orange">Bendahara Umum</span>
+                                <h4 class="font-display font-bold text-lg text-to-dark">Ratna Ningsih</h4>
+                                <p class="text-xs text-to-muted">TO-033 • Chapter Surabaya • Taruna CX 2000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divisi & Koordinator Bidang -->
+                <div class="mt-14">
+                    <div class="text-center mb-8">
+                        <span class="px-4 py-1.5 rounded-full bg-to-bgLight border border-to-borderLight text-xs font-bold text-to-dark uppercase tracking-wider">
+                            Divisi & Koordinator Bidang Nasional
+                        </span>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Divisi 1 -->
+                        <div class="bg-to-bgLight rounded-2xl p-6 border border-to-borderLight hover:bg-white hover:shadow-md transition">
+                            <div class="w-11 h-11 rounded-xl bg-to-orange text-white flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-route"></i>
+                            </div>
+                            <span class="text-xs font-bold text-to-orange uppercase">Kabid Touring & Event</span>
+                            <h4 class="font-display font-bold text-lg text-to-dark mt-1">Dimas Anggara</h4>
+                            <p class="text-xs text-to-muted mt-0.5 mb-3">TO-042 • Chapter Yogyakarta</p>
+                            <p class="text-xs text-slate-600 leading-relaxed border-t border-to-borderLight pt-3">
+                                Menyusun rute touring nasional, manajemen konvoi (RC & Sweeper), serta koordinasi Jambore Nasional.
+                            </p>
+                        </div>
+
+                        <!-- Divisi 2 -->
+                        <div class="bg-to-bgLight rounded-2xl p-6 border border-to-borderLight hover:bg-white hover:shadow-md transition">
+                            <div class="w-11 h-11 rounded-xl bg-to-orange text-white flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-wrench"></i>
+                            </div>
+                            <span class="text-xs font-bold text-to-orange uppercase">Kabid Teknis & Bengkel</span>
+                            <h4 class="font-display font-bold text-lg text-to-dark mt-1">Irwan Setiawan</h4>
+                            <p class="text-xs text-to-muted mt-0.5 mb-3">TO-019 • Chapter Bekasi</p>
+                            <p class="text-xs text-slate-600 leading-relaxed border-t border-to-borderLight pt-3">
+                                Mengelola program coaching clinic mesin, validasi bengkel rekanan resmi, dan tim Emergency Rescue.
+                            </p>
+                        </div>
+
+                        <!-- Divisi 3 -->
+                        <div class="bg-to-bgLight rounded-2xl p-6 border border-to-borderLight hover:bg-white hover:shadow-md transition">
+                            <div class="w-11 h-11 rounded-xl bg-to-orange text-white flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-bullhorn"></i>
+                            </div>
+                            <span class="text-xs font-bold text-to-orange uppercase">Kabid Humas & Media</span>
+                            <h4 class="font-display font-bold text-lg text-to-dark mt-1">Fajar Nugroho</h4>
+                            <p class="text-xs text-to-muted mt-0.5 mb-3">TO-058 • Chapter Bogor</p>
+                            <p class="text-xs text-slate-600 leading-relaxed border-t border-to-borderLight pt-3">
+                                Publikasi kegiatan, hubungan lintas komunitas otomotif, serta verifikasi pendaftaran member baru.
+                            </p>
+                        </div>
+
+                        <!-- Divisi 4 -->
+                        <div class="bg-to-bgLight rounded-2xl p-6 border border-to-borderLight hover:bg-white hover:shadow-md transition">
+                            <div class="w-11 h-11 rounded-xl bg-to-orange text-white flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-hand-holding-heart"></i>
+                            </div>
+                            <span class="text-xs font-bold text-to-orange uppercase">Kabid Sosial & Kemasyarakatan</span>
+                            <h4 class="font-display font-bold text-lg text-to-dark mt-1">Siti Rahmawati</h4>
+                            <p class="text-xs text-to-muted mt-0.5 mb-3">TO-064 • Chapter Solo</p>
+                            <p class="text-xs text-slate-600 leading-relaxed border-t border-to-borderLight pt-3">
+                                Mengkoordinasikan aksi bakti sosial TO Peduli, tanggap darurat bencana, dan santunan sosial.
+                            </p>
+                        </div>
+
+                        <!-- Divisi 5 -->
+                        <div class="bg-to-bgLight rounded-2xl p-6 border border-to-borderLight hover:bg-white hover:shadow-md transition">
+                            <div class="w-11 h-11 rounded-xl bg-to-orange text-white flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-shirt"></i>
+                            </div>
+                            <span class="text-xs font-bold text-to-orange uppercase">Kabid Logistik & Merchandise</span>
+                            <h4 class="font-display font-bold text-lg text-to-dark mt-1">Rizky Ramadhan</h4>
+                            <p class="text-xs text-to-muted mt-0.5 mb-3">TO-071 • Chapter Tangerang</p>
+                            <p class="text-xs text-slate-600 leading-relaxed border-t border-to-borderLight pt-3">
+                                Pengadaan starter kit member baru (stiker nopung, kemeja seragam resmi, dan ID Card TO).
+                            </p>
+                        </div>
+
+                        <!-- Divisi 6 -->
+                        <div class="bg-to-bgLight rounded-2xl p-6 border border-to-borderLight hover:bg-white hover:shadow-md transition">
+                            <div class="w-11 h-11 rounded-xl bg-to-orange text-white flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-map-pin"></i>
+                            </div>
+                            <span class="text-xs font-bold text-to-orange uppercase">Koordinator Antar Chapter</span>
+                            <h4 class="font-display font-bold text-lg text-to-dark mt-1">Dedi Kurniawan</h4>
+                            <p class="text-xs text-to-muted mt-0.5 mb-3">TO-025 • Chapter Lampung</p>
+                            <p class="text-xs text-slate-600 leading-relaxed border-t border-to-borderLight pt-3">
+                                Menjembatani komunikasi pengurus pusat dengan 18 ketua chapter wilayah di seluruh Indonesia.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PAGE 4: DIREKTORI ANGGOTA                                             -->
+        <!-- ===================================================================== -->
+        <section id="page-anggota" class="page-section">
+            <div class="bg-to-bgLight border-b border-to-borderLight py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <span class="text-to-orange font-bold text-xs uppercase tracking-wider">Database Resmi</span>
+                        <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-to-dark mt-2">Direktori Anggota Taruna Owners</h1>
+                        <p class="text-to-muted mt-3 max-w-2xl text-sm sm:text-base">Cari dan temukan saudara sesama pengguna Daihatsu Taruna berdasarkan nama, nomor lambung (NOPUNG), chapter wilayah, maupun tipe mobil.</p>
+                    </div>
+                    <button onclick="openRegisterModal()" class="bg-to-orange hover:bg-to-orangeDark text-white font-semibold text-sm px-5 py-3 rounded-xl shadow-md transition self-start md:self-auto flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Daftarkan Unit Anda
+                    </button>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+                <!-- Filter & Search Box -->
+                <div class="bg-to-bgLight p-4 sm:p-6 rounded-2xl border border-to-borderLight mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                        <!-- Search Input -->
+                        <div class="md:col-span-5 relative">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-to-muted"></i>
+                            <input type="text" id="member-search" oninput="filterMembers()" placeholder="Cari nama anggota atau NOPUNG (misal: TO-001)..." 
+                                   class="w-full pl-11 pr-4 py-3 rounded-xl bg-white border border-to-borderLight text-sm focus:outline-none focus:border-to-orange focus:ring-2 focus:ring-orange-500/20">
+                        </div>
+
+                        <!-- Filter Chapter -->
+                        <div class="md:col-span-4">
+                            <select id="member-chapter-filter" onchange="filterMembers()" class="w-full px-4 py-3 rounded-xl bg-white border border-to-borderLight text-sm font-medium text-to-dark focus:outline-none focus:border-to-orange">
+                                <option value="ALL">Semua Chapter Wilayah</option>
+                                <option value="Jabodetabek">Chapter Jabodetabek</option>
+                                <option value="Bandung">Chapter Bandung Raya</option>
+                                <option value="Jawa Tengah">Chapter Jawa Tengah & DIY</option>
+                                <option value="Jawa Timur">Chapter Jawa Timur</option>
+                                <option value="Sumatera">Chapter Sumatera</option>
+                            </select>
+                        </div>
+
+                        <!-- Filter Varian Mobil -->
+                        <div class="md:col-span-3">
+                            <select id="member-variant-filter" onchange="filterMembers()" class="w-full px-4 py-3 rounded-xl bg-white border border-to-borderLight text-sm font-medium text-to-dark focus:outline-none focus:border-to-orange">
+                                <option value="ALL">Semua Varian Taruna</option>
+                                <option value="CX">Taruna CX / CL</option>
+                                <option value="CSX">Taruna CSX</option>
+                                <option value="FGX">Taruna FGX / FGZ</option>
+                                <option value="Oxxy">Taruna Oxxy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-4 pt-3 border-t border-to-borderLight text-xs text-to-muted">
+                        <span id="member-count-label">Menampilkan 12 anggota aktif terdaftar</span>
+                        <button onclick="resetMemberFilters()" class="text-to-orange hover:underline font-semibold">Reset Filter</button>
+                    </div>
+                </div>
+
+                <!-- Grid Kartu Anggota -->
+                <div id="members-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Di-render secara dinamis oleh JS -->
+                </div>
+
+                <!-- Empty State jika pencarian tidak ditemukan -->
+                <div id="members-empty" class="hidden text-center py-16 bg-to-bgLight rounded-3xl border border-to-borderLight">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-white text-to-muted flex items-center justify-center text-2xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-car-burst"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-to-dark">Data Anggota Tidak Ditemukan</h3>
+                    <p class="text-sm text-to-muted mt-1">Coba gunakan kata kunci nama, nomor lambung, atau filter chapter yang lain.</p>
+                    <button onclick="resetMemberFilters()" class="mt-4 bg-to-orange text-white text-sm font-semibold px-5 py-2.5 rounded-xl">Tampilkan Semua Anggota</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PAGE 5: AGENDA & KEGIATAN                                             -->
+        <!-- ===================================================================== -->
+        <section id="page-agenda" class="page-section">
+            <div class="bg-to-bgLight border-b border-to-borderLight py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <span class="text-to-orange font-bold text-xs uppercase tracking-wider">Jadwal & Event Resmi</span>
+                    <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-to-dark mt-2">Agenda Kegiatan Taruna Owners</h1>
+                    <p class="text-to-muted mt-3 max-w-2xl text-sm sm:text-base">Ikuti jadwal kopi darat rutin, touring gabungan lintas chapter, coaching clinic mesin, hingga bakti sosial keluarga besar TO.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+                <!-- Filter Tab Status Agenda -->
+                <div class="flex flex-wrap items-center gap-2 mb-8">
+                    <button onclick="filterAgenda('ALL')" data-agenda-filter="ALL" class="agenda-filter-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-to-orange text-white shadow-sm transition">
+                        Semua Agenda
+                    </button>
+                    <button onclick="filterAgenda('UPCOMING')" data-agenda-filter="UPCOMING" class="agenda-filter-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-to-bgLight text-to-dark hover:bg-slate-200 transition">
+                        Akan Datang
+                    </button>
+                    <button onclick="filterAgenda('COMPLETED')" data-agenda-filter="COMPLETED" class="agenda-filter-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-to-bgLight text-to-dark hover:bg-slate-200 transition">
+                        Telah Selesai
+                    </button>
+                </div>
+
+                <!-- List Agenda -->
+                <div id="agenda-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Di-render secara dinamis oleh JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-to-dark text-slate-300 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+                <!-- Brand Info -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-to-orange flex items-center justify-center text-white">
+                            <i class="fa-solid fa-compass text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="font-display font-extrabold text-xl text-white leading-none">
+                                TARUNA <span class="text-to-orange">OWNERS</span>
+                            </div>
+                            <span class="text-[11px] text-slate-400 uppercase tracking-wider">Seduluran Selawase</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-md">
+                        Komunitas resmi pemilik dan pecinta mobil Daihatsu Taruna di Indonesia. Menjunjung tinggi nilai persaudaraan, kepedulian sosial, dan keselamatan berkendara.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Taruna%20Owners" target="_blank" aria-label="WhatsApp" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-emerald-600 text-white flex items-center justify-center transition">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                        <a href="#instagram" onclick="showToast('Mengalihkan ke Instagram resmi @tarunaowners.id'); return false;" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-to-orange text-white flex items-center justify-center transition">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#facebook" onclick="showToast('Mengalihkan ke Grup Facebook Taruna Owners Indonesia'); return false;" aria-label="Facebook" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center transition">
+                            <i class="fa-brands fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#youtube" onclick="showToast('Mengalihkan ke Channel YouTube Taruna Owners TV'); return false;" aria-label="YouTube" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-red-600 text-white flex items-center justify-center transition">
+                            <i class="fa-brands fa-youtube text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigasi Cepat -->
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider">Menu Navigasi</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><button onclick="navigateTo('home')" class="hover:text-to-orange transition">Beranda Utama</button></li>
+                        <li><button onclick="navigateTo('profil')" class="hover:text-to-orange transition">Profil & Sejarah TO</button></li>
+                        <li><button onclick="navigateTo('struktur')" class="hover:text-to-orange transition">Struktur Kepengurusan</button></li>
+                        <li><button onclick="navigateTo('anggota')" class="hover:text-to-orange transition">Direktori Anggota Resmi</button></li>
+                        <li><button onclick="navigateTo('agenda')" class="hover:text-to-orange transition">Agenda & Jadwal Touring</button></li>
+                    </ul>
+                </div>
+
+                <!-- Sekretariat & Pendaftaran -->
+                <div class="lg:col-span-4 space-y-4">
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider">Informasi Pendaftaran</h4>
+                    <p class="text-sm text-slate-400">
+                        Ingin bergabung atau menanyakan syarat pembuatan Nomor Lambung (NOPUNG)? Hubungi Sekretariat Nasional kami:
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot text-to-orange mt-1"></i>
+                            <span>Sekretariat Pusat: Jl. Raya Kalimalang No. 88, Bekasi - Jabodetabek</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-envelope text-to-orange"></i>
+                            <span>sekretariat@tarunaowners.or.id</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Taruna%20Owners%2C%20saya%20ingin%20bertanya%20informasi%20pendaftaran%20member%20baru." target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm px-5 py-3 rounded-xl transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Direct WhatsApp Pendaftaran
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 Taruna Owners (TO) Indonesia. Hak Cipta Dilindungi.</p>
+                <p>Dibuat dengan semangat <span class="text-to-orange font-semibold">Seduluran Selawase</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== FLOATING WHATSAPP BUTTON ==================== -->
+    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Taruna%20Owners%2C%20saya%20tertarik%20bergabung%20dan%20ingin%20tahu%20informasi%20pendaftaran%20member%20TO." 
+       target="_blank" 
+       aria-label="Chat WhatsApp Pendaftaran Taruna Owners"
+       class="fixed bottom-5 right-5 z-40 group flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white pl-4 pr-5 py-3.5 rounded-full shadow-2xl shadow-emerald-900/40 transition-all hover:scale-105 active:scale-95">
+        <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+        </span>
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+        <div class="text-left leading-tight">
+            <div class="text-[10px] uppercase font-bold text-emerald-100">Info Pendaftaran</div>
+            <div class="text-xs sm:text-sm font-bold">Chat WhatsApp TO</div>
+        </div>
+    </a>
+
+    <!-- ==================== MODAL PENDAFTARAN ANGGOTA BARU ==================== -->
+    <div id="register-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-to-borderLight animate-[fadeIn_0.25s_ease-out]">
+            <div class="bg-to-dark px-6 py-5 flex items-center justify-between text-white">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-to-orange flex items-center justify-center">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg leading-none">Pendaftaran Member Baru</h3>
+                        <p class="text-xs text-slate-400 mt-1">Terhubung langsung ke WhatsApp Admin Pusat</p>
+                    </div>
+                </div>
+                <button onclick="closeRegisterModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form onsubmit="submitRegistrationToWA(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-to-dark uppercase mb-1.5">Nama Lengkap *</label>
+                    <input type="text" id="reg-name" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-2.5 rounded-xl bg-to-bgLight border border-to-borderLight text-sm focus:bg-white focus:outline-none focus:border-to-orange">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-to-dark uppercase mb-1.5">Domisili / Chapter *</label>
+                        <select id="reg-chapter" required class="w-full px-4 py-2.5 rounded-xl bg-to-bgLight border border-to-borderLight text-sm focus:bg-white focus:outline-none focus:border-to-orange">
+                            <option value="Jabodetabek">Jabodetabek</option>
+                            <option value="Bandung Raya">Bandung Raya</option>
+                            <option value="Jawa Tengah & DIY">Jawa Tengah & DIY</option>
+                            <option value="Jawa Timur">Jawa Timur</option>
+                            <option value="Sumatera">Sumatera</option>
+                            <option value="Bali & Nusa Tenggara">Bali & Nusa Tenggara</option>
+                            <option value="Kalimantan / Sulawesi">Kalimantan / Sulawesi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-to-dark uppercase mb-1.5">Varian & Tahun Taruna *</label>
+                        <input type="text" id="reg-car" required placeholder="Contoh: CSX 2001 / FGX 2003" class="w-full px-4 py-2.5 rounded-xl bg-to-bgLight border border-to-borderLight text-sm focus:bg-white focus:outline-none focus:border-to-orange">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-to-dark uppercase mb-1.5">Nomor Polisi (Plat) *</label>
+                        <input type="text" id="reg-plate" required placeholder="Contoh: B 1234 TO" class="w-full px-4 py-2.5 rounded-xl bg-to-bgLight border border-to-borderLight text-sm uppercase focus:bg-white focus:outline-none focus:border-to-orange">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-to-dark uppercase mb-1.5">Warna Kendaraan</label>
+                        <input type="text" id="reg-color" placeholder="Contoh: Silver Metalik / Hitam" class="w-full px-4 py-2.5 rounded-xl bg-to-bgLight border border-to-borderLight text-sm focus:bg-white focus:outline-none focus:border-to-orange">
+                    </div>
+                </div>
+
+                <div class="bg-to-orangeLight border border-orange-200 rounded-xl p-3.5 text-xs text-slate-700 flex items-start gap-2.5">
+                    <i class="fa-solid fa-circle-info text-to-orange mt-0.5"></i>
+                    <span>Setelah menekan tombol kirim, Anda akan diarahkan otomatis ke <strong>WhatsApp Admin Taruna Owners</strong> dengan format data siap kirim.</span>
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-2">
+                    <button type="button" onclick="closeRegisterModal()" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-to-muted hover:bg-to-bgLight transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md flex items-center gap-2 transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Kirim via WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div id="toast-box" class="fixed top-24 right-5 z-50 hidden bg-to-dark text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-xl shadow-xl border border-slate-700 items-center gap-2.5">
+        <i class="fa-solid fa-circle-check text-to-orange"></i>
+        <span id="toast-message">Notifikasi</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // Nomor WhatsApp Sekretariat Resmi Taruna Owners (Format Internasional tanpa +)
+        const ADMIN_WA_NUMBER = "6281234567890";
+
+        // 1. DATA ANGGOTA RESMI TARUNA OWNERS
+        const membersData = [
+            { nopung: "TO-001", name: "Hendra Saputra", chapter: "Jabodetabek", city: "Bekasi", variant: "FGX", carFull: "Taruna FGX 1.5 EFI (2003)", color: "Silver Metalik", status: "Pengurus Pusat" },
+            { nopung: "TO-014", name: "Bambang Wijaya", chapter: "Bandung", city: "Kota Bandung", variant: "Oxxy", carFull: "Taruna Oxxy 1.5 EFI (2005)", color: "Hitam Metalik", status: "Pengurus Pusat" },
+            { nopung: "TO-019", name: "Irwan Setiawan", chapter: "Jabodetabek", city: "Jakarta Timur", variant: "CSX", carFull: "Taruna CSX 1.6 Karbu (2000)", color: "Biru Metalik", status: "Kabid Teknis" },
+            { nopung: "TO-025", name: "Dedi Kurniawan", chapter: "Sumatera", city: "Bandar Lampung", variant: "FGX", carFull: "Taruna FGZ 1.5 EFI (2004)", color: "Merah Maroon", status: "Korwil Sumatera" },
+            { nopung: "TO-027", name: "Andi Pratama", chapter: "Jawa Tengah", city: "Semarang", variant: "CSX", carFull: "Taruna CSX 1.5 EFI (2002)", color: "Champagne Gold", status: "Sekjen Pusat" },
+            { nopung: "TO-033", name: "Ratna Ningsih", chapter: "Jawa Timur", city: "Surabaya", variant: "CX", carFull: "Taruna CX 1.6 (2000)", color: "Hijau Botol", status: "Bendahara Umum" },
+            { nopung: "TO-042", name: "Dimas Anggara", chapter: "Jawa Tengah", city: "Yogyakarta", variant: "Oxxy", carFull: "Taruna Oxxy 1.5 (2006)", color: "Silver Stone", status: "Kabid Touring" },
+            { nopung: "TO-058", name: "Fajar Nugroho", chapter: "Jabodetabek", city: "Bogor", variant: "CX", carFull: "Taruna CL 1.6 (1999)", color: "Putih Solid", status: "Kabid Humas" },
+            { nopung: "TO-064", name: "Siti Rahmawati", chapter: "Jawa Tengah", city: "Surakarta", variant: "CSX", carFull: "Taruna CSX 1.5 EFI (2001)", color: "Hitam", status: "Kabid Sosial" },
+            { nopung: "TO-079", name: "Eko Prasetyo", chapter: "Jawa Timur", city: "Malang", variant: "FGX", carFull: "Taruna FGX 1.5 EFI (2003)", color: "Biru Tua", status: "Member Aktif" },
+            { nopung: "TO-088", name: "Rian Hidayat", chapter: "Bandung", city: "Cimahi", variant: "CX", carFull: "Taruna CX 1.5 EFI (2002)", color: "Silver", status: "Member Aktif" },
+            { nopung: "TO-104", name: "Taufik Hidayat", chapter: "Sumatera", city: "Palembang", variant: "Oxxy", carFull: "Taruna Oxxy 1.5 (2005)", color: "Abu-abu Metalik", status: "Member Aktif" }
+        ];
+
+        // 2. DATA AGENDA KEGIATAN TARUNA OWNERS
+        const agendaData = [
+            {
+                id: 1,
+                title: "Kopdar Gabungan & Coaching Clinic Kaki-Kaki",
+                category: "Kopdar & Teknis",
+                date: "Minggu, 13 Desember 2026",
+                time: "09.00 WIB - Selesai",
+                location: "Rest Area KM 57 Tol Jakarta - Cikampek",
+                chapter: "Jabodetabek & Bandung",
+                status: "UPCOMING",
+                desc: "Silaturahmi rutin akhir tahun sekaligus pengecekan gratis suspensi, tie rod, dan ball joint bersama mekanik spesialis Taruna."
+            },
+            {
+                id: 2,
+                title: "Touring Keluarga Lintas Selatan & Camp Ceria",
+                category: "Touring Wisata",
+                date: "Sabtu - Minggu, 23 - 24 Januari 2027",
+                time: "06.00 WIB (Titik Kumpul)",
+                location: "Pantai Menganti, Kebumen - Jawa Tengah",
+                chapter: "Nasional (All Chapter)",
+                status: "UPCOMING",
+                desc: "Perjalanan touring santai ramah keluarga dengan rute jalur selatan yang indah, dilengkapi api unggun dan games anak-anak."
+            },
+            {
+                id: 3,
+                title: "TO Peduli: Bakti Sosial & Santunan Panti Asuhan",
+                category: "Bakti Sosial",
+                date: "Minggu, 14 Februari 2027",
+                time: "08.30 WIB - 13.00 WIB",
+                location: "Lembang, Kabupaten Bandung Barat",
+                chapter: "Chapter Bandung Raya",
+                status: "UPCOMING",
+                desc: "Penyerahan donasi sembako, perlengkapan sekolah, dan santunan hasil swadaya anggota Taruna Owners."
+            },
+            {
+                id: 4,
+                title: "Jambore Nasional ke-14 Taruna Owners Indonesia",
+                category: "Event Akbar",
+                date: "17 - 18 Oktober 2026",
+                time: "Selesai Dilaksanakan",
+                location: "Batu, Malang - Jawa Timur",
+                chapter: "Seluruh Chapter Nusantara",
+                status: "COMPLETED",
+                desc: "Dihadiri lebih dari 320 unit Daihatsu Taruna dari berbagai provinsi dengan rangkaian kontes modifikasi, gala dinner, dan doorprize."
+            },
+            {
+                id: 5,
+                title: "Ngoprek Bareng: Tune Up Karburator & Kalibrasi EFI",
+                category: "Workshop Mesin",
+                date: "20 September 2026",
+                time: "Selesai Dilaksanakan",
+                location: "Bengkel Rekanan TO Motor, Semarang",
+                chapter: "Chapter Jawa Tengah",
+                status: "COMPLETED",
+                desc: "Edukasi penyetelan AFR, pembersihan throttle body, dan tips menjaga efisiensi konsumsi BBM Taruna."
+            }
+        ];
+
+        // 3. SPA NAVIGATION SYSTEM
+        function navigateTo(pageId) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+
+            // Tampilkan halaman target
+            const target = document.getElementById(`page-${pageId}`);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            // Update styling tombol navbar desktop
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.dataset.nav === pageId) {
+                    btn.classList.add('bg-white', 'text-to-orange', 'shadow-sm');
+                    btn.classList.remove('text-to-dark', 'hover:text-to-orange');
+                } else {
+                    btn.classList.remove('bg-white', 'text-to-orange', 'shadow-sm');
+                    btn.classList.add('text-to-dark', 'hover:text-to-orange');
+                }
+            });
+
+            // Update styling tombol navbar mobile
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                if (btn.dataset.nav === pageId) {
+                    btn.classList.add('bg-to-orangeLight', 'text-to-orange');
+                    btn.classList.remove('text-to-dark');
+                } else {
+                    btn.classList.remove('bg-to-orangeLight', 'text-to-orange');
+                    btn.classList.add('text-to-dark');
+                }
+            });
+
+            // Scroll halus ke atas
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-drawer');
+            const icon = document.getElementById('mobile-menu-icon');
+            drawer.classList.toggle('hidden');
+            if (drawer.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        }
+
+        // 4. HERO SLIDESHOW / CAROUSEL LOGIC
+        let currentSlide = 0;
+        const totalSlides = 4;
+        let slideInterval;
+
+        function updateCarouselUI() {
+            const slides = document.querySelectorAll('.slide-item');
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.remove('opacity-0', 'z-0', 'pointer-events-none');
+                    slide.classList.add('opacity-100', 'z-10');
+                } else {
+                    slide.classList.remove('opacity-100', 'z-10');
+                    slide.classList.add('opacity-0', 'z-0', 'pointer-events-none');
+                }
+            });
+
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.classList.remove('w-2.5', 'bg-white/40');
+                    dot.classList.add('w-8', 'bg-to-orange');
+                } else {
+                    dot.classList.remove('w-8', 'bg-to-orange');
+                    dot.classList.add('w-2.5', 'bg-white/40');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarouselUI();
+            resetSlideTimer();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarouselUI();
+            resetSlideTimer();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarouselUI();
+            resetSlideTimer();
+        }
+
+        function resetSlideTimer() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5500);
+        }
+
+        // 5. RENDER DIREKTORI ANGGOTA & FILTER
+        function renderMembers(list) {
+            const grid = document.getElementById('members-grid');
+            const empty = document.getElementById('members-empty');
+            const countLabel = document.getElementById('member-count-label');
+
+            countLabel.textContent = `Menampilkan ${list.length} anggota terdaftar`;
+
+            if (list.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            grid.innerHTML = list.map(member => {
+                const initials = member.name.split(' ').map(n => n[0]).slice(0, 2).join('');
+                return `
+                    <div class="bg-white rounded-2xl p-5 border border-to-borderLight hover:border-to-orange shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-center gap-3.5">
+                                    <div class="w-12 h-12 rounded-xl bg-to-bgLight border border-to-borderLight text-to-orange font-display font-bold flex items-center justify-center text-base shrink-0">
+                                        ${initials}
+                                    </div>
+                                    <div>
+                                        <span class="inline-block px-2.5 py-0.5 rounded-md bg-to-orangeLight text-to-orange font-bold text-xs tracking-wide">
+                                            ${member.nopung}
+                                        </span>
+                                        <h3 class="font-display font-bold text-base text-to-dark mt-1">${member.name}</h3>
+                                    </div>
+                                </div>
+                                <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-to-bgLight text-to-muted border border-to-borderLight">
+                                    ${member.status}
+                                </span>
+                            </div>
+
+                            <div class="mt-4 pt-4 border-t border-to-borderLight space-y-2 text-xs text-slate-600">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-to-muted"><i class="fa-solid fa-location-dot text-to-orange w-4"></i> Chapter:</span>
+                                    <span class="font-semibold text-to-dark">${member.chapter} (${member.city})</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-to-muted"><i class="fa-solid fa-car text-to-orange w-4"></i> Unit:</span>
+                                    <span class="font-semibold text-to-dark">${member.carFull}</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-to-muted"><i class="fa-solid fa-palette text-to-orange w-4"></i> Warna:</span>
+                                    <span class="font-medium">${member.color}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterMembers() {
+            const searchQuery = document.getElementById('member-search').value.toLowerCase().trim();
+            const chapterVal = document.getElementById('member-chapter-filter').value;
+            const variantVal = document.getElementById('member-variant-filter').value;
+
+            const filtered = membersData.filter(m => {
+                const matchSearch = m.name.toLowerCase().includes(searchQuery) || 
+                                    m.nopung.toLowerCase().includes(searchQuery) ||
+                                    m.city.toLowerCase().includes(searchQuery);
+                const matchChapter = chapterVal === 'ALL' || m.chapter === chapterVal;
+                const matchVariant = variantVal === 'ALL' || m.variant === variantVal;
+                return matchSearch && matchChapter && matchVariant;
+            });
+
+            renderMembers(filtered);
+        }
+
+        function resetMemberFilters() {
+            document.getElementById('member-search').value = '';
+            document.getElementById('member-chapter-filter').value = 'ALL';
+            document.getElementById('member-variant-filter').value = 'ALL';
+            renderMembers(membersData);
+        }
+
+        // 6. RENDER AGENDA & PREVIEW BERANDA
+        function createAgendaCardHTML(item) {
+            const isUpcoming = item.status === 'UPCOMING';
+            const badgeClass = isUpcoming 
+                ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
+                : 'bg-slate-100 text-slate-600 border-slate-200';
+            const badgeText = isUpcoming ? 'Akan Datang' : 'Telah Selesai';
+
+            const waMessage = encodeURIComponent(`Halo Panitia Taruna Owners, saya ingin konfirmasi kehadiran / bertanya detail untuk agenda: "${item.title}" (${item.date}).`);
+
+            return `
+                <div class="bg-white rounded-2xl p-6 border border-to-borderLight shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-xs font-bold text-to-orange uppercase tracking-wider">${item.category}</span>
+                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-full border ${badgeClass}">
+                                ${badgeText}
+                            </span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-to-dark leading-snug mb-3">${item.title}</h3>
+                        <p class="text-xs text-to-muted leading-relaxed mb-4">${item.desc}</p>
+                        
+                        <div class="space-y-2 text-xs text-slate-700 bg-to-bgLight p-3.5 rounded-xl border border-to-borderLight">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-regular fa-calendar text-to-orange w-4 text-center"></i>
+                                <span class="font-semibold">${item.date}</span>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-regular fa-clock text-to-orange w-4 text-center"></i>
+                                <span>${item.time}</span>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-location-dot text-to-orange w-4 text-center mt-0.5"></i>
+                                <span>${item.location}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-to-borderLight flex items-center justify-between gap-2">
+                        <span class="text-[11px] font-semibold text-to-muted">${item.chapter}</span>
+                        ${isUpcoming ? `
+                            <a href="https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}" target="_blank" class="inline-flex items-center gap-1.5 bg-to-orange hover:bg-to-orangeDark text-white text-xs font-bold px-3.5 py-2 rounded-xl transition">
+                                <i class="fa-brands fa-whatsapp"></i> Konfirmasi Hadir
+                            </a>
+                        ` : `
+                            <span class="text-xs font-semibold text-slate-400"><i class="fa-solid fa-check-double mr-1"></i> Terlaksana</span>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterAgenda(statusFilter) {
+            // Update tab button UI
+            document.querySelectorAll('.agenda-filter-btn').forEach(btn => {
+                if (btn.dataset.agendaFilter === statusFilter) {
+                    btn.classList.remove('bg-to-bgLight', 'text-to-dark', 'hover:bg-slate-200');
+                    btn.classList.add('bg-to-orange', 'text-white', 'shadow-sm');
+                } else {
+                    btn.classList.remove('bg-to-orange', 'text-white', 'shadow-sm');
+                    btn.classList.add('bg-to-bgLight', 'text-to-dark', 'hover:bg-slate-200');
+                }
+            });
+
+            const listContainer = document.getElementById('agenda-list');
+            const filtered = statusFilter === 'ALL' 
+                ? agendaData 
+                : agendaData.filter(a => a.status === statusFilter);
+
+            listContainer.innerHTML = filtered.map(createAgendaCardHTML).join('');
+        }
+
+        function renderHomeAgendaPreview() {
+            const container = document.getElementById('home-agenda-preview');
+            const upcomingThree = agendaData.filter(a => a.status === 'UPCOMING').slice(0, 3);
+            container.innerHTML = upcomingThree.map(createAgendaCardHTML).join('');
+        }
+
+        // 7. MODAL PENDAFTARAN & INTEGRASI WHATSAPP
+        function openRegisterModal() {
+            const modal = document.getElementById('register-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRegisterModal() {
+            const modal = document.getElementById('register-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function submitRegistrationToWA(event) {
+            event.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const chapter = document.getElementById('reg-chapter').value;
+            const car = document.getElementById('reg-car').value.trim();
+            const plate = document.getElementById('reg-plate').value.trim().toUpperCase();
+            const color = document.getElementById('reg-color').value.trim() || '-';
+
+            const text = `Halo Admin *Taruna Owners (TO)*, saya ingin mendaftar menjadi member resmi dengan data berikut:\n\n` +
+                         `• *Nama Lengkap:* ${name}\n` +
+                         `• *Chapter / Domisili:* ${chapter}\n` +
+                         `• *Varian & Tahun:* ${car}\n` +
+                         `• *Nomor Polisi:* ${plate}\n` +
+                         `• *Warna Mobil:* ${color}\n\n` +
+                         `Mohon informasi tahapan registrasi dan pembuatan NOPUNG selanjutnya. Terima kasih!`;
+
+            const waUrl = `https://wa.me/${ADMIN_WA_NUMBER}?text=${encodeURIComponent(text)}`;
+            closeRegisterModal();
+            showToast('Membuka WhatsApp Admin Taruna Owners...');
+            window.open(waUrl, '_blank');
+        }
+
+        // 8. TOAST HELPER
+        function showToast(msg) {
+            const toast = document.getElementById('toast-box');
+            const msgEl = document.getElementById('toast-message');
+            msgEl.textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3200);
+        }
+
+        // INITIALIZE ON LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            navigateTo('home');
+            resetSlideTimer();
+            renderMembers(membersData);
+            filterAgenda('ALL');
+            renderHomeAgendaPreview();
+        });
+    </script>
+</body>
+</html>
